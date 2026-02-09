@@ -3,6 +3,7 @@ import store
 
 
 def start(best_buy: store.Store):
+    """Run the CLI menu for the given store."""
     while True:
         print("\nStore Menu")
         print("-----------")
