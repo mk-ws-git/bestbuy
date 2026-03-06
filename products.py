@@ -10,16 +10,27 @@ class Product:
         self.name = name
         self.price = price
         self.quantity = quantity
-        self.active = True
+        self.active = quantity > 0
 
     def get_quantity(self) -> int:
         return self.quantity
 
     def set_quantity(self, quantity: int) -> None:
+        if quantity < 0:
+            raise ValueError("Quantity cannot be negative")
+
         self.quantity = quantity
+        if quantity == 0:
+            self.deactivate()
 
     def is_active(self) -> bool:
-        return self.quantity > 0
+        return self.active
+
+    def activate(self) -> None:
+        self.active = True
+
+    def deactivate(self) -> None:
+        self.active = False
 
     def buy(self, quantity: int) -> float:
         if quantity <= 0:
@@ -27,7 +38,7 @@ class Product:
         if quantity > self.quantity:
             raise ValueError("Not enough stock")
 
-        self.quantity -= quantity
+        self.set_quantity(self.quantity - quantity)
         return self.price * quantity
 
     def show(self) -> str:
