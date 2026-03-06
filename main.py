@@ -74,6 +74,7 @@ def make_order(best_buy: store.Store) -> None:
 
 
 def start(best_buy: store.Store):
+    """Run the CLI menu for the given store."""
     while True:
         print_menu()
         choice = input("Please choose a number: ").strip()
